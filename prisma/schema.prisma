@@ -1,0 +1,64 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  email     String   @unique
+  senha     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Loja {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  cidade    String
+  endereco  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  produtos  Produto[]
+}
+
+model Categoria {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  descricao String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  produtos  Produto[]
+}
+
+model Produto {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome         String
+  preco        Float
+  categoriaId  String   @db.ObjectId
+  lojaId       String   @db.ObjectId
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  categoria    Categoria @relation(fields: [categoriaId], references: [id])
+  loja         Loja      @relation(fields: [lojaId], references: [id])
+}
+
+model Pedido {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  cliente    String
+  produto    String
+  quantidade Int
+  status     String   @default("pendente")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

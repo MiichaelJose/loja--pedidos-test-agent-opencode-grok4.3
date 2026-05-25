@@ -29,3 +29,5 @@ coverage/
 
 # Husky
 .husky/_
+
+/generated/prisma
