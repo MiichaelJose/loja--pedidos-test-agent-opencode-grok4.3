@@ -30,7 +30,34 @@ Definição da estrutura dos dados (interfaces/classes simples).
 
 ## Armazenamento
 
-Todo o projeto utiliza **armazenamento em memória** (arrays dentro dos Services). Não há banco de dados externo.
+- **Dados da aplicação**: Atualmente em memória (arrays nos Services). Estamos migrando para **Prisma + MongoDB**.
+- **Rate Limiting**: Redis (via Docker local) — usado exclusivamente para proteção contra abuso.
+
+### Banco de Dados (MongoDB via Docker)
+
+O MongoDB é executado via Docker usando o arquivo `docker-compose.yml`.
+
+**Connection String:**
+```
+mongodb://admin:admin@localhost:27017/loja-pedidos?authSource=admin
+```
+
+**Comandos principais:**
+```bash
+docker compose up -d          # Subir MongoDB
+npx prisma db push            # Aplicar schema
+npx prisma studio             # Interface visual
+```
+
+### Status Atual da Migração
+
+- Prisma 6 instalado e configurado
+- `PrismaModule` e `PrismaService` criados em `src/prisma`
+- Schema inicial definido em `prisma/schema.prisma`
+- MongoDB rodando via Docker
+- Próximo passo: migrar gradualmente os services para usar o Prisma em vez de arrays em memória
+
+> O Redis continua sendo usado apenas para Rate Limiting.
 
 ## Relacionamentos
 
