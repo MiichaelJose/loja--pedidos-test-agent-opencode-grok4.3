@@ -105,6 +105,16 @@ Cada módulo segue o padrão NestJS com Controller, Service, DTOs, Entities e te
 
 ---
 
+## 🛡️ Proteção e Performance
+
+O projeto utiliza **Rate Limiting** com Redis para proteger a API contra abusos.
+
+- Limite padrão: **100 requisições por minuto por IP**
+- Armazenamento: Redis (Docker local)
+- Documentação completa: [`docs/rate-limiting.md`](docs/rate-limiting.md)
+
+---
+
 ## 📝 Convenções de Commit
 
 Este projeto utiliza **Conventional Commits**.

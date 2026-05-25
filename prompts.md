@@ -39,6 +39,14 @@
 
 - Sempre adicionar `@ApiTags`, `@ApiOperation`, `@ApiResponse` e `@ApiProperty` com exemplos.
 
+## Rate Limiting e Redis
+
+- O projeto utiliza Rate Limiting com Redis para proteção contra abusos.
+- O limite padrão atual é de 100 requisições por minuto por IP.
+- O storage customizado está em `src/common/throttler/redis-throttler.storage.ts`.
+- Sempre atualizar `docs/rate-limiting.md` quando modificar regras de limitação.
+- No futuro (após JWT), evoluir para rate limiting por usuário.
+
 ---
 
 **Mantenha estas instruções sempre atualizadas.**

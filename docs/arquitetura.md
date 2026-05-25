@@ -47,3 +47,14 @@ Os testes são executados com **Jest** e **Supertest**.
 ## Documentação
 
 A documentação da API é gerada automaticamente com **Swagger** e está disponível em `/docs`.
+
+## Rate Limiting e Redis
+
+O projeto implementa **proteção contra abuso** usando Rate Limiting com Redis:
+
+- Utiliza `@nestjs/throttler` com armazenamento customizado em Redis.
+- Limite global aplicado via `APP_GUARD`.
+- Configuração localizada em `src/common/throttler/redis-throttler.storage.ts`.
+- Documentação detalhada em `docs/rate-limiting.md`.
+
+Isso prepara o terreno para futuras melhorias como rate limiting por usuário (após autenticação JWT).
