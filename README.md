@@ -122,10 +122,24 @@ O projeto utiliza **Rate Limiting** com Redis para proteger a API contra abusos.
 
 O projeto utiliza **Prisma + MongoDB** para persistência de dados.
 
-### Como rodar MongoDB + Redis com Docker
+### Como rodar MongoDB + Redis com Docker (Recomendado)
+
+O MongoDB é executado como um **Replica Set de nó único**, que é a forma mais estável e recomendada para usar com Prisma.
 
 ```bash
+# Subir os serviços
 docker compose up -d
+
+# Aguardar o MongoDB inicializar e criar o Replica Set (obrigatório na primeira vez)
+sleep 8
+docker exec -it mongodb-loja mongosh \
+  -u admin -p admin --authenticationDatabase admin \
+  --eval "rs.initiate()"
+
+# Verificar se o Replica Set está ativo
+docker exec -it mongodb-loja mongosh \
+  -u admin -p admin --authenticationDatabase admin \
+  --eval "rs.status()"
 ```
 
 ### Connection String

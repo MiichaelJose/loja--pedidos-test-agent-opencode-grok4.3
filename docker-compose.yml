@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mongodb:
     image: mongo:7
@@ -8,15 +10,23 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: loja-pedidos
     volumes:
       - mongodb_data:/data/db
+    # Replica Set de nó único - obrigatório para Prisma usar transações no MongoDB
+    command: ["--replSet", "rs0", "--bind_ip_all"]
     healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand('ping').ok"]
-      interval: 10s
+      test: |
+        mongosh --quiet --eval '
+          try { 
+            rs.status().ok 
+          } catch (e) { 
+            0 
+          }
+        '
+      interval: 5s
       timeout: 5s
-      retries: 5
-      start_period: 20s
+      retries: 30
+      start_period: 40s
 
   redis:
     image: redis:alpine

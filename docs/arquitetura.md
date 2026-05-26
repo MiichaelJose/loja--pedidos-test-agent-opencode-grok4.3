@@ -35,11 +35,21 @@ Definição da estrutura dos dados (interfaces/classes simples).
 
 ### Banco de Dados
 
-O MongoDB é executado via Docker (`docker-compose.yml`).
+O MongoDB é executado via Docker (`docker-compose.yml`) como um **Replica Set de nó único**, que é a configuração recomendada para uso com Prisma (devido ao suporte a transações).
 
 **Connection String:**
 ```
 mongodb://admin:admin@localhost:27017/loja-pedidos?authSource=admin
+```
+
+**Como inicializar (primeira vez):**
+
+```bash
+docker compose up -d
+sleep 8
+docker exec -it mongodb-loja mongosh \
+  -u admin -p admin --authenticationDatabase admin \
+  --eval "rs.initiate()"
 ```
 
 **Módulos migrados:**
