@@ -163,6 +163,8 @@ Este projeto utiliza **Conventional Commits**.
 
 Consulte o arquivo completo em: [`docs/conventional-commits.md`](docs/conventional-commits.md)
 
+Para mais detalhes sobre testes, veja [`docs/testing.md`](docs/testing.md).
+
 ### Exemplos de Commits Válidos
 
 ```bash
