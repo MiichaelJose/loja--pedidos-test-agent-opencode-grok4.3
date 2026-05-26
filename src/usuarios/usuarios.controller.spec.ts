@@ -2,6 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { UsuariosModule } from './usuarios.module';
+import { PrismaService } from '../prisma/prisma.service';
+
+const mockPrismaService = {
+  usuario: {
+    create: jest.fn().mockResolvedValue({ id: 'abc123', nome: 'João', email: 'joao@test.com' }),
+    findMany: jest.fn().mockResolvedValue([]),
+  },
+};
 
 describe('UsuariosController (e2e)', () => {
   let app: INestApplication;
@@ -9,6 +17,12 @@ describe('UsuariosController (e2e)', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [UsuariosModule],
+      providers: [
+        {
+          provide: PrismaService,
+          useValue: mockPrismaService,
+        },
+      ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
