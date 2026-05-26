@@ -67,11 +67,11 @@ O módulo `produtos` injeta `CategoriasService` e `LojasService` para validar se
 
 ## Testes
 
-Cada módulo possui:
-- `*.service.spec.ts`
-- `*.controller.spec.ts`
+Cada módulo possui testes unitários (`*.service.spec.ts` e `*.controller.spec.ts`) com mocks do PrismaService.
 
-Os testes são executados com **Jest** e **Supertest**.
+Testes end-to-end (e2e) estão sendo expandidos para validar fluxos completos contra o banco de dados MongoDB de teste.
+
+Consulte `docs/testing.md` para mais detalhes.
 
 ## Documentação
 

@@ -101,7 +101,7 @@ Cada módulo segue o padrão NestJS com Controller, Service, DTOs, Entities e te
 
 - Adicionar banco de dados (Prisma + MongoDB)
 - Implementar autenticação JWT + rate limiting por usuário
-- Melhorar testes e2e
+- Expandir cobertura de testes unitários e e2e (ver `docs/testing.md`)
 - Adicionar paginação e filtros
 - Implementar Response Caching com Redis (Fase 2)
 

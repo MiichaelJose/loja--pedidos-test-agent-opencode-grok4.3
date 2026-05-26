@@ -30,6 +30,9 @@
 
 - Todo módulo deve ter testes unitários e controller.
 - Usar `beforeEach` para limpar o estado entre os testes.
+- Testes unitários devem mockar o `PrismaService`.
+- Testes e2e devem rodar contra um banco de teste separado (`loja-pedidos-test`).
+- Atualizar `docs/testing.md` sempre que a estratégia de testes mudar.
 
 ## Documentação
 
