@@ -52,15 +52,13 @@
 ## Banco de Dados (Prisma + MongoDB)
 
 - Todos os módulos estão migrados para **Prisma + MongoDB**.
-- O MongoDB deve ser executado como **Replica Set de nó único** (recomendado para Prisma).
-- Use o `docker-compose.yml` fornecido no projeto.
-- Connection String padrão:
+- O MongoDB é executado como **Replica Set de nó único** (obrigatório para transações do Prisma).
+- Use `docker compose up -d` + `./scripts/init-mongo-replica.sh` para inicializar automaticamente.
+- Connection String:
   `mongodb://admin:admin@localhost:27017/loja-pedidos?authSource=admin`
-- Na primeira execução, é necessário inicializar o Replica Set:
-  `docker exec -it mongodb-loja mongosh -u admin -p admin --authenticationDatabase admin --eval "rs.initiate()"`
-- Não utilizar mais arrays em memória para armazenamento de dados.
+- Não usar mais arrays em memória para persistência.
 - Redis é usado para Rate Limiting.
-- Sempre atualizar `docker-compose.yml` e a documentação quando mudar a configuração do banco.
+- Sempre atualizar `docker-compose.yml` e documentação quando mudar a configuração do banco.
 
 ---
 
