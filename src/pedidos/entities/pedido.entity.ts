@@ -1,5 +1,5 @@
 export class Pedido {
-  id: number;
+  id: string;
   cliente: string;
   produto: string;
   quantidade: number;

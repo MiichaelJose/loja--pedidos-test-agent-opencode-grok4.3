@@ -2,43 +2,46 @@ import { Injectable } from '@nestjs/common';
 import { Pedido } from './entities/pedido.entity';
 import { CreatePedidoDto } from './dto/create-pedido.dto';
 import { UpdatePedidoDto } from './dto/update-pedido.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PedidosService {
-  private pedidos: Pedido[] = [];
-  private nextId = 1;
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreatePedidoDto): Pedido {
-    const pedido: Pedido = {
-      id: this.nextId++,
-      cliente: dto.cliente,
-      produto: dto.produto,
-      quantidade: dto.quantidade,
-      status: dto.status || 'pendente',
-    };
-    this.pedidos.push(pedido);
-    return pedido;
+  async create(dto: CreatePedidoDto): Promise<Pedido> {
+    return this.prisma.pedido.create({
+      data: {
+        cliente: dto.cliente,
+        produto: dto.produto,
+        quantidade: dto.quantidade,
+        status: dto.status || 'pendente',
+      },
+    });
   }
 
-  findAll(): Pedido[] {
-    return this.pedidos;
+  async findAll(): Promise<Pedido[]> {
+    return this.prisma.pedido.findMany();
   }
 
-  findOne(id: number): Pedido | undefined {
-    return this.pedidos.find(p => p.id === id);
+  async findOne(id: string): Promise<Pedido | null> {
+    return this.prisma.pedido.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, dto: UpdatePedidoDto): Pedido | undefined {
-    const pedido = this.findOne(id);
-    if (!pedido) return undefined;
-    Object.assign(pedido, dto);
-    return pedido;
+  async update(id: string, dto: UpdatePedidoDto): Promise<Pedido | null> {
+    return this.prisma.pedido.update({
+      where: { id },
+      data: dto,
+    });
   }
 
-  remove(id: number): boolean {
-    const index = this.pedidos.findIndex(p => p.id === id);
-    if (index === -1) return false;
-    this.pedidos.splice(index, 1);
-    return true;
+  async remove(id: string): Promise<boolean> {
+    try {
+      await this.prisma.pedido.delete({ where: { id } });
+      return true;
+    } catch {
+      return false;
+    }
   }
 }

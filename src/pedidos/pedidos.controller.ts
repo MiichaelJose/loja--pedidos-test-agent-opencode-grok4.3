@@ -24,23 +24,23 @@ export class PedidosController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar pedido por ID' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 404, description: 'Pedido não encontrado' })
   findOne(@Param('id') id: string) {
-    return this.pedidosService.findOne(+id);
+    return this.pedidosService.findOne(id);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Atualizar pedido' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   update(@Param('id') id: string, @Body() updateDto: UpdatePedidoDto) {
-    return this.pedidosService.update(+id, updateDto);
+    return this.pedidosService.update(id, updateDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Remover pedido' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   remove(@Param('id') id: string) {
-    return this.pedidosService.remove(+id);
+    return this.pedidosService.remove(id);
   }
 }
