@@ -12,7 +12,10 @@
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "setup": "bash scripts/setup.sh",
+    "dev": "bash scripts/dev.sh",
+    "test:e2e": "bash scripts/test:e2e.sh"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
