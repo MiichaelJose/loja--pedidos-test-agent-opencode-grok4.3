@@ -25,24 +25,24 @@ export class ProdutosController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar produto por ID' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 404, description: 'Produto não encontrado' })
   findOne(@Param('id') id: string) {
-    return this.produtosService.findOne(+id);
+    return this.produtosService.findOne(id);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Atualizar produto' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 400, description: 'Categoria ou Loja não encontrada' })
   update(@Param('id') id: string, @Body() updateDto: UpdateProdutoDto) {
-    return this.produtosService.update(+id, updateDto);
+    return this.produtosService.update(id, updateDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Remover produto' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   remove(@Param('id') id: string) {
-    return this.produtosService.remove(+id);
+    return this.produtosService.remove(id);
   }
 }

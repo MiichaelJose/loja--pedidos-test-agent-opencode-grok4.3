@@ -12,11 +12,11 @@ export class CreateProdutoDto {
   @Min(0)
   preco: number;
 
-  @ApiProperty({ example: 1, description: 'ID da categoria do produto' })
-  @IsNumber()
-  categoriaId: number;
+  @ApiProperty({ example: 'abc123', description: 'ID da categoria do produto' })
+  @IsString()
+  categoriaId: string;
 
-  @ApiProperty({ example: 1, description: 'ID da loja do produto' })
-  @IsNumber()
-  lojaId: number;
+  @ApiProperty({ example: 'abc123', description: 'ID da loja do produto' })
+  @IsString()
+  lojaId: string;
 }
