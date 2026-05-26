@@ -26,11 +26,25 @@ npm run test:watch
 
 ### Testes End-to-End
 
+**Forma recomendada:**
+
+```bash
+./scripts/test:e2e.sh
+```
+
+Este script:
+- Sobe Docker (se necessário)
+- Aplica o schema no banco de testes (`loja-pedidos-test`)
+- Limpa **todo** o banco de testes antes de rodar
+- Executa os testes e2e
+
+Você também pode rodar diretamente:
+
 ```bash
 npm run test:e2e
 ```
 
-> **Importante**: Antes de rodar testes e2e, certifique-se de que o MongoDB de teste esteja acessível (connection string configurada em `test/jest-e2e.json` ou via variáveis de ambiente).
+> **Importante**: Os testes e2e usam o banco `loja-pedidos-test` (mesma instância do MongoDB, banco diferente).
 
 ## Estrutura de Testes
 

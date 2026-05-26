@@ -30,10 +30,29 @@ A documentação interativa está disponível via **Swagger**.
 
 ## 🚀 Como Instalar e Rodar
 
+### Primeira vez (Setup)
+
 ```bash
 npm install
-npm run start:dev
+./scripts/setup.sh
 ```
+
+### Desenvolvimento diário
+
+```bash
+./scripts/dev.sh
+```
+
+- A aplicação vai subir normalmente.
+- Abra **outro terminal** e rode `npm test` para executar os testes unitários.
+
+### Testes End-to-End (com banco isolado)
+
+```bash
+./scripts/test:e2e.sh
+```
+
+O script sobe automaticamente o ambiente, aplica o schema no banco de testes (`loja-pedidos-test`) e limpa os dados antes de executar os testes.
 
 Servidor roda em: `http://localhost:3000`
 
