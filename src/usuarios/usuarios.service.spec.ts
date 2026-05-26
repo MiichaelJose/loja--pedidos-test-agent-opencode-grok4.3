@@ -16,9 +16,9 @@ describe('UsuariosService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should create a user', () => {
-    const user = service.create({ nome: 'Test', email: 'test@test.com', senha: '123456' });
-    expect(user.id).toBe(1);
+  it('should create a user', async () => {
+    const user = await service.create({ nome: 'Test', email: 'test@test.com', senha: '123456' });
     expect(user.nome).toBe('Test');
+    expect(user.email).toBe('test@test.com');
   });
 });

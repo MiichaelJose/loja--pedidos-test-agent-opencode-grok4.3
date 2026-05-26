@@ -2,40 +2,41 @@ import { Injectable } from '@nestjs/common';
 import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UsuariosService {
-  private usuarios: Usuario[] = [];
-  private nextId = 1;
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreateUsuarioDto): Usuario {
-    const usuario: Usuario = {
-      id: this.nextId++,
-      ...dto,
-    };
-    this.usuarios.push(usuario);
-    return usuario;
+  async create(dto: CreateUsuarioDto): Promise<Usuario> {
+    return this.prisma.usuario.create({
+      data: dto,
+    });
   }
 
-  findAll(): Usuario[] {
-    return this.usuarios;
+  async findAll(): Promise<Usuario[]> {
+    return this.prisma.usuario.findMany();
   }
 
-  findOne(id: number): Usuario | undefined {
-    return this.usuarios.find(u => u.id === id);
+  async findOne(id: string): Promise<Usuario | null> {
+    return this.prisma.usuario.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, dto: UpdateUsuarioDto): Usuario | undefined {
-    const usuario = this.findOne(id);
-    if (!usuario) return undefined;
-    Object.assign(usuario, dto);
-    return usuario;
+  async update(id: string, dto: UpdateUsuarioDto): Promise<Usuario | null> {
+    return this.prisma.usuario.update({
+      where: { id },
+      data: dto,
+    });
   }
 
-  remove(id: number): boolean {
-    const index = this.usuarios.findIndex(u => u.id === id);
-    if (index === -1) return false;
-    this.usuarios.splice(index, 1);
-    return true;
+  async remove(id: string): Promise<boolean> {
+    try {
+      await this.prisma.usuario.delete({ where: { id } });
+      return true;
+    } catch {
+      return false;
+    }
   }
 }

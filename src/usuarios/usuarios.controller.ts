@@ -24,23 +24,23 @@ export class UsuariosController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar usuário por ID' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
   findOne(@Param('id') id: string) {
-    return this.usuariosService.findOne(+id);
+    return this.usuariosService.findOne(id);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Atualizar usuário' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   update(@Param('id') id: string, @Body() updateDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(+id, updateDto);
+    return this.usuariosService.update(id, updateDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Remover usuário' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   remove(@Param('id') id: string) {
-    return this.usuariosService.remove(+id);
+    return this.usuariosService.remove(id);
   }
 }
