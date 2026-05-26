@@ -120,33 +120,12 @@ O projeto utiliza **Rate Limiting** com Redis para proteger a API contra abusos.
 
 ## 🗄️ Banco de Dados
 
-Estamos em processo de migração para **Prisma + MongoDB**.
+O projeto utiliza **Prisma + MongoDB** para persistência de dados.
 
-### Como rodar o MongoDB com Docker
-
-A forma mais simples é usando o `docker-compose`:
+### Como rodar MongoDB + Redis com Docker
 
 ```bash
-# Subir o MongoDB
 docker compose up -d
-
-# Verificar se está rodando
-docker compose ps
-
-# Ver logs
-docker compose logs -f mongodb
-```
-
-Ou manualmente:
-
-```bash
-docker run -d \
-  --name mongodb-loja \
-  -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=admin \
-  -v mongodb_data:/data/db \
-  mongo:7
 ```
 
 ### Connection String
@@ -158,17 +137,12 @@ mongodb://admin:admin@localhost:27017/loja-pedidos?authSource=admin
 ### Comandos úteis
 
 ```bash
-# Aplicar schema no banco
 npx prisma db push
-
-# Abrir Prisma Studio
 npx prisma studio
-
-# Gerar Prisma Client
 npx prisma generate
 ```
 
-> **Atenção**: Por enquanto os módulos ainda usam armazenamento em memória. A migração gradual para o Prisma será feita nos próximos passos.
+Todos os módulos (Usuarios, Lojas, Categorias, Produtos e Pedidos) já estão persistindo dados no MongoDB via Prisma.
 
 ---
 

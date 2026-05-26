@@ -51,12 +51,12 @@
 
 ## Banco de Dados (Prisma + MongoDB)
 
-- Migração em andamento para **Prisma + MongoDB**.
-- O MongoDB deve ser executado via Docker usando o `docker-compose.yml`.
+- Todos os módulos estão migrados para **Prisma + MongoDB**.
+- O MongoDB + Redis devem ser executados via Docker usando o `docker-compose.yml`.
 - Connection String padrão:
   `mongodb://admin:admin@localhost:27017/loja-pedidos?authSource=admin`
-- Até a migração completa, os services ainda podem usar armazenamento em memória.
-- Redis deve continuar sendo usado apenas para Rate Limiting e Cache (não como banco principal).
+- Não utilizar mais arrays em memória para armazenamento de dados.
+- Redis é usado para Rate Limiting.
 - Sempre atualizar `docker-compose.yml` e a documentação quando mudar a configuração do banco.
 
 ---
