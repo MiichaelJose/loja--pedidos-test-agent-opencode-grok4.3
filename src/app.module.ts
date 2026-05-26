@@ -6,6 +6,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { LojasModule } from './lojas/lojas.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { ProdutosModule } from './produtos/produtos.module';
+import { PrismaModule } from './prisma/prisma.module';
 import { RedisThrottlerStorage } from './common/throttler/redis-throttler.storage';
 
 @Module({
@@ -19,6 +20,7 @@ import { RedisThrottlerStorage } from './common/throttler/redis-throttler.storag
       ],
       storage: new RedisThrottlerStorage('redis://localhost:6379'),
     }),
+    PrismaModule,
     PedidosModule,
     UsuariosModule,
     LojasModule,

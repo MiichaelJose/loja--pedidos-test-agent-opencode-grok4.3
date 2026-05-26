@@ -1,5 +1,5 @@
 export interface Loja {
-  id: number;
+  id: string;
   nome: string;
   cidade: string;
   endereco: string;

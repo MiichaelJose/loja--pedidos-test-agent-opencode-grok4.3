@@ -24,23 +24,23 @@ export class LojasController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar loja por ID' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 404, description: 'Loja não encontrada' })
   findOne(@Param('id') id: string) {
-    return this.lojasService.findOne(+id);
+    return this.lojasService.findOne(id);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Atualizar loja' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   update(@Param('id') id: string, @Body() updateDto: UpdateLojaDto) {
-    return this.lojasService.update(+id, updateDto);
+    return this.lojasService.update(id, updateDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Remover loja' })
-  @ApiParam({ name: 'id', type: Number })
+  @ApiParam({ name: 'id', type: String })
   remove(@Param('id') id: string) {
-    return this.lojasService.remove(+id);
+    return this.lojasService.remove(id);
   }
 }
